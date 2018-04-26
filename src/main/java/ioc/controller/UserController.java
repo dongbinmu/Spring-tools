@@ -10,6 +10,7 @@ import ioc.service.UserService;
  */
 @Component
 public class UserController {
+
     @Inject
     public UserService userService;
 

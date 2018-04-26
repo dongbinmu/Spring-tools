@@ -1,6 +1,7 @@
 package ioc.utils;
 
 import ioc.IocContext;
+import ioc.annotation.Inject;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -20,9 +21,11 @@ public class IocUtil {
 
                 for (Field field : fields) {
                     Class<?> fieldClazz = field.getType();
-                    field.setAccessible(true);
-                    Object fieldObj = beanContext.get(fieldClazz);
-                    field.set(obj,fieldObj);
+                    if(field.isAnnotationPresent(Inject.class)){
+                        field.setAccessible(true);
+                        Object fieldObj = beanContext.get(fieldClazz);
+                        field.set(obj,fieldObj);
+                    }
                 }
             }
         } catch (Exception e) {
