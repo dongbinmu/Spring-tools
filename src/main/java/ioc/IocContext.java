@@ -4,7 +4,6 @@ import ioc.annotation.Component;
 import ioc.utils.IocUtil;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
@@ -59,11 +58,8 @@ public class IocContext {
     }
 
     private static File[] getClassFile(String filePath) {
-        return new File(filePath).listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return (file.isFile() && file.getName().endsWith(".class")) || file.isDirectory();
-            }
-        });
+        return new File(filePath).listFiles(file -> (file.isFile() && file.getName().endsWith(".class")) || file.isDirectory());
     }
+
+
 }
